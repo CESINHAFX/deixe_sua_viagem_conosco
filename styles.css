@@ -1,0 +1,178 @@
+/* reset básico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* imagem de fundo como elemento que rola com a página */
+.page-bg {
+  display: block;
+  width: 100%;
+  height: auto;          /* preserva proporção e permite rolagem para ver toda a imagem */
+  object-fit: contain;   /* garante que a imagem inteira seja visível */
+  position: relative;    /* fica no fluxo e rola com a página */
+  z-index: -1;           /* coloca atrás do conteúdo */
+}
+
+/* NAV */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: rgba(51,51,51,0.9); /* leve transparência para ver o fundo */
+  color: white;
+  height: 60px;
+  font-family: Arial, sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* acima da .page-bg */
+}
+
+/* áreas do nav */
+.nav-left { flex: 0 0 auto; padding-right: 10px; }
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 30px;
+}
+.nav-right { flex: 0 0 auto; margin-left: auto; }
+
+/* links do centro */
+.nav-center li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* busca e botões */
+.nav-right input[type="text"] {
+  padding: 5px;
+  width: 180px;
+  border-radius: 5px;
+  border: none;
+}
+.nav-right button {
+  padding: 7px 15px;
+  background-color: #006400;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.nav-right button:hover { background-color: #004d00; }
+
+/* garante que o conteúdo não fique sob o nav fixo */
+body {
+  font-family: Arial, sans-serif;
+  padding-top: 60px; /* empurra conteúdo abaixo do nav fixo */
+}
+
+/* hero text */
+.hero-text {
+  min-height: 60vh;
+  display: block;
+}
+.hero-text h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 120px;
+  font-weight: normal;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+  position: absolute;
+  top: 8%;
+  left: 80px;
+  transform: none;
+  text-align: left;
+  z-index: 1000;
+  margin: 0;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ícones sociais verticais */
+.social-icons {
+  position: fixed;
+  top: 40%;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 2000;
+}
+.social-icons a {
+  color: white;
+  font-size: 28px;
+  transition: 0.3s;
+}
+.social-icons a:hover {
+  color: #ff4b2b;
+  transform: scale(1.2);
+}
+
+/* título principal com imagem substituindo o "T" */
+.site-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 25px;
+  color: white;
+  margin: 0;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* wrapper da palavra para controle fino */
+.trip-word {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.12em;
+}
+
+/* imagem que substitui o "T" */
+.trip-image {
+  height: 1em;         /* ajusta para coincidir com a altura da fonte */
+  width: auto;
+  display: inline-block;
+  vertical-align: baseline;
+  transform: translateY(0.02em);
+  pointer-events: none;
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .hero-text h2 { font-size: 80px;left: 70px; top: 10%; }
+}
+/* responsivo */
+@media (max-width: 900px) {
+    .hero-text h2 {
+      font-size: 80px;
+      left: 70px;
+      top: 10%;
+    }
+    .site-title {
+      font-size: 48px;
+    }
+    .nav-center { gap: 20px; }
+    .nav-right input[type="text"] { width: 150px; }
+  }
+  
+@media (max-width: 600px) {
+    .nav-center { gap: 12px; }
+    .nav-center li a { font-size: 14px; }
+    .nav-right input[type="text"] { width: 120px; }
+    .hero-text h2 {
+      font-size: 36px;   /* reduzido para caber no layout móvel */
+      left: 56px;        /* distancia do lado para não sobrepor ícones */
+      top: 12%;
+      white-space: normal;
+    }
+    .site-title { font-size: 28px; }
+    .trip-image { height: 0.85em; }
+    .social-icons {
+      top: 45%;
+      left: 8px;
+      gap: 10px;
+    }
+  }
+  

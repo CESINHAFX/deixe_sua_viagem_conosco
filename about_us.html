@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About Us - Demo</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- header compartilhado será injetado aqui -->
+  <div id="shared-header"></div>
+
+  <!-- Conteúdo específico da página About Us -->
+  <main>
+    <section class="about-hero">
+      <div class="container">
+        <h1>About Us</h1>
+        <p>Informações sobre a empresa e missão.</p>
+      </div>
+    </section>
+
+    <section class="company-info container">
+      <h2>Information about the company</h2>
+      <p>An introduction to the team members, displaying their names and their designated roles.</p>
+
+      <div class="teams" id="teamsGrid">
+        <!-- Exemplo de perfil -->
+        <article class="team-card">
+          <img src="/fragments/avatar-placeholder.png" alt="Ana Silva" class="team-avatar">
+          <h3>Ana Silva</h3>
+          <p class="role">RH</p>
+          <button class="btn-contact" type="button" data-name="Ana Silva">Entrar em contato</button>
+        </article>
+
+        <article class="team-card">
+          <img src="/fragments/avatar-placeholder.png" alt="Bruno Costa" class="team-avatar">
+          <h3>Bruno Costa</h3>
+          <p class="role">Vendedor</p>
+          <button class="btn-contact" type="button" data-name="Bruno Costa">Entrar em contato</button>
+        </article>
+
+        <!-- adicione os demais perfis seguindo o mesmo padrão -->
+      </div>
+    </section>
+  </main>
+
+  <!-- footer compartilhado será injetado aqui -->
+  <div id="shared-footer"></div>
+
+  <script>
+    // função simples e robusta para carregar fragments via fetch e injetar no DOM
+    function loadFragment(url, containerId) {
+      fetch(url)
+        .then(function(response) {
+          if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
+          return response.text();
+        })
+        .then(function(html) {
+          var container = document.getElementById(containerId);
+          if (!container) return;
+          container.innerHTML = html;
+          // destacar link ativo se existir menu dentro do fragment
+          markActiveLink(container);
+        })
+        .catch(function(err) {
+          console.error('Erro ao carregar fragmento:', err);
+        });
+    }
+
+    // adiciona classe .active ao link cujo href corresponde ao arquivo atual
+    function markActiveLink(container) {
+      var el = typeof container === 'string' ? document.getElementById(container) : container;
+      if (!el) return;
+      var links = el.querySelectorAll('a[href]');
+      var current = window.location.pathname.split('/').pop() || 'index.html';
+      links.forEach(function(a) {
+        var hrefFile = (a.getAttribute('href') || '').split('/').pop();
+        if (hrefFile === current) a.classList.add('active'); else a.classList.remove('active');
+      });
+    }
+
+    // comportamento básico dos botões de contato (exemplo)
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.btn-contact');
+      if (!btn) return;
+      var name = btn.dataset.name || 'Contato';
+      var msg = prompt('Enviar mensagem para ' + name + '\nDigite sua mensagem:');
+      if (msg) alert('Mensagem enviada a ' + name + ':\n\n' + msg);
+    });
+
+    // carregar header e footer (ajuste os caminhos conforme sua estrutura)
+    loadFragment('/fragments/header.html', 'shared-header');
+    loadFragment('/fragments/footer.html', 'shared-footer');
+  </script>
+</body>
+</html>
