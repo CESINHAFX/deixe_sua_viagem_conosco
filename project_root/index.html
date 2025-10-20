@@ -4,14 +4,15 @@
   <meta charset="UTF-8">                                           <!-- codificação -->
   <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- responsividade -->
   <title>Leave Your Trip to Us</title>                             <!-- título da aba -->
-  <link rel="stylesheet" href="styles.css">                        <!-- CSS relativo (arquivo na raiz) -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"> <!-- font externa -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"> <!-- ícones -->
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <script src="js/page-transitions.js" defer></script>
 </head>
 <body>
 
-  <!-- imagem de fundo (link HTTPS conforme solicitado) -->
-  <img src="https://cesinhafx.github.io/travel_recomendations/image%20(2).png" alt="fundo" class="page-bg"> <!-- mantive o link HTTPS conforme pediu -->
+  <!-- Container wrapper para imagem de fundo -->
+  <div class="bg-wrapper"></div>
 
   <!-- placeholder para header (será injetado via fetch) -->
   <div id="shared-header"></div>
@@ -20,8 +21,9 @@
   <main>
     <section class="hero">
       <div class="hero-text">
-        <h2>Your dream, one click away</h2>                         <!-- título principal -->
-        <button id="more-informations" type="button">Make your dream come true here</button> <!-- botão -->
+        <h2>𝒴𝑜𝓊𝓇 𝒹𝓇𝑒𝒶𝓂,
+𝑜𝓃𝑒 𝒸𝓁𝒾𝒸𝓀 𝒶𝓌𝒶𝓎</h2>
+        <button id="more-informations" type="button">Make your dream come true here</button>
       </div>
       <div style="height:2000px"></div>                            <!-- espaço demo para rolagem -->
     </section>
@@ -42,8 +44,12 @@
           var container = document.getElementById(containerId);
           if (!container) return;
           container.innerHTML = html;
-          markActiveLink(container);     // destaca link ativo no fragment (se houver)
-          runFragmentScripts(container); // executa scripts embutidos no fragment
+          markActiveLink(container);
+          runFragmentScripts(container);
+          // Adiciona os event listeners após carregar o header
+          if (containerId === 'shared-header') {
+            setupHeaderButtons();
+          }
         })
         .catch(function(err) {
           console.error('Erro ao carregar fragmento:', err);
@@ -59,14 +65,40 @@
         var current = window.location.pathname.split('/').pop() || 'index.html';
         links.forEach(function(a) {
           var href = (a.getAttribute('href') || '').split('/').pop();
-          if (href === current) a.classList.add('active'); else a.classList.remove('active');
+          if (href === current) a.classList.add('active');
         });
       } catch (e) {
         console.error('markActiveLink error:', e);
       }
     }
 
-    // executa scripts presentes dentro do fragmento injetado (opcional)
+    // configura os botões do header
+    function setupHeaderButtons() {
+      const searchBtn = document.getElementById('btnSearch');
+      const cleanBtn = document.getElementById('clean');
+      const searchInput = document.getElementById('Research');
+
+      if (searchBtn) {
+        searchBtn.addEventListener('click', function() {
+          if (searchInput) {
+            const searchValue = searchInput.value.trim();
+            if (searchValue) {
+              alert('Pesquisando por: ' + searchValue);
+            }
+          }
+        });
+      }
+
+      if (cleanBtn) {
+        cleanBtn.addEventListener('click', function() {
+          if (searchInput) {
+            searchInput.value = '';
+          }
+        });
+      }
+    }
+
+    // executa scripts do fragmento
     function runFragmentScripts(container) {
       try {
         var containerEl = typeof container === 'string' ? document.getElementById(container) : container;
@@ -88,9 +120,9 @@
       }
     }
 
-    // carregar fragments usando caminhos relativos (fragments/header.html e fragments/footer.html)
-    loadFragment('fragments/header.html', 'shared-header');
-    loadFragment('fragments/footer.html', 'shared-footer');
+    // carregar fragments usando caminhos relativos
+    loadFragment('../fragments/header.html', 'shared-header');
+    loadFragment('../fragments/footer.html', 'shared-footer');
 
     // comportamento do botão hero: rolar até o footer
     document.addEventListener('click', function(e) {

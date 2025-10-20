@@ -1,12 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About Us - Demo</title>
-  <link rel="stylesheet" href="styles.css"> <!-- CSS relativo -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About Us - Leave Your Trip to Us</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <script src="js/page-transitions.js" defer></script>
 </head>
 <body>
 
@@ -15,35 +16,40 @@
 
   <!-- Conteúdo específico da página About Us -->
   <main>
-    <section class="about-hero">
-      <div class="container">
-        <h1>About Us</h1>
-        <p>Informações sobre a empresa e missão.</p>
+    <div class="about-page">
+      <h1>About Us</h1>
+      
+      <div class="company-info">
+        <p>Welcome to Our Company! We are a team of passionate individuals dedicated to providing excellent services/products to our customers. Our mission is to <strong>provide the best experience</strong> for people traveling to different destinations around the world.</p>
+        
+        <p>Our values include integrity, innovation, customer satisfaction, and teamwork. We believe in <strong>putting our customers first</strong> and <strong>working together</strong> to achieve our goals.</p>
+        
+        <p>Feel free to explore our website to learn more about what we offer!</p>
       </div>
-    </section>
 
-    <section class="company-info container">
-      <h2>Information about the company</h2>
-      <p>An introduction to the team members, displaying their names and their designated roles.</p>
+      <section class="team-section">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <h3>John Doe</h3>
+            <p>John is responsible for strategic planning and overall company direction.</p>
+            <span class="role">CEO</span>
+          </div>
 
-      <div class="teams" id="teamsGrid">
-        <!-- Exemplo de perfil -->
-        <article class="team-card">
-          <img src="fragments/avatar-placeholder.png" alt="Ana Silva" class="team-avatar"> <!-- caminho relativo -->
-          <h3>Ana Silva</h3>
-          <p class="role">RH</p>
-          <button class="btn-contact" type="button" data-name="Ana Silva">Entrar em contato</button>
-        </article>
+          <div class="team-member">
+            <h3>Celina Thomas</h3>
+            <p>Celina Thomas is responsible for team management and project coordination.</p>
+            <span class="role">Team Lead</span>
+          </div>
 
-        <article class="team-card">
-          <img src="fragments/avatar-placeholder.png" alt="Bruno Costa" class="team-avatar">
-          <h3>Bruno Costa</h3>
-          <p class="role">Vendedor</p>
-          <button class="btn-contact" type="button" data-name="Bruno Costa">Entrar em contato</button>
-        </article>
-
-      </div>
-    </section>
+          <div class="team-member">
+            <h3>Mike Tysen</h3>
+            <p>Mike Tysen is responsible for ensuring timely delivery of all services.</p>
+            <span class="role">Delivery Head</span>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
 
   <!-- footer compartilhado será injetado aqui -->
@@ -62,6 +68,18 @@
           if (!container) return;
           container.innerHTML = html;
           markActiveLink(container);
+    // tirar barra de search do header pro pg about_us.html
+          const currentPage = window.location.pathname.split('/').pop();
+          if (currentPage === 'about_us.html' || currentPage === 'contact_us.html') {
+            const searchBar = document.getElementById('Research');
+            const btnSearch = document.getElementById('btnSearch');
+            const btnClean = document.getElementById('clean');
+            if (btnSearch && btnClean && searchBar) {
+              btnSearch.style.display = "none";
+              searchBar.style.display = "none";
+              btnClean.style.display = "none";
+            }
+          }
         })
         .catch(function(err) {
           console.error('Erro ao carregar fragmento:', err);
@@ -88,9 +106,23 @@
       var msg = prompt('Enviar mensagem para ' + name + '\nDigite sua mensagem:');
       if (msg) alert('Mensagem enviada a ' + name + ':\n\n' + msg);
     });
-
-    // carregar header e footer (caminhos relativos)
-    loadFragment('fragments/header.html', 'shared-header');
+    // tirar barra de search do header pro pg about_us.html
+    
+   // carregar header e footer (caminhos relativos)
+    loadFragment('fragments/header.html', 'shared-header', () => {
+    // tirar barra de search do header pro pg about_us.html
+          const currentPage = window.location.pathname.split('/').pop();
+          if (currentPage === 'about_us.html' || currentPage === 'contact_us.html') {
+            const searchBar = document.getElementById('Research');
+            const btnSearch = document.getElementById('btnSearch');
+            const btnClean = document.getElementById('clean');
+            if (btnSearch && btnClean && searchBar) {
+              btnSearch.style.display = "none";
+              searchBar.style.display = "none";
+              btnClean.style.display = "none";
+            }
+          }
+        });
     loadFragment('fragments/footer.html', 'shared-footer');
   </script>
 </body>

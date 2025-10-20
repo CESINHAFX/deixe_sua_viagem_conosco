@@ -1,55 +1,87 @@
-/* reset básico: aplica box-sizing e zera margens/paddings para todos os elementos */
+/* Reset e variáveis */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* página: imagem de fundo como elemento que rola com a página */
-.page-bg {
-  display: block;                 /* elemento em bloco que ocupa largura */
-  width: 100%;                    /* ocupa 100% da largura do contêiner */
-  height: auto;                   /* mantém proporção da imagem */
-  object-fit: contain;            /* garante ver a imagem inteira sem cortar */
-  position: relative;             /* permanece no fluxo e rola com a página */
-  z-index: -1;                    /* fica atrás do conteúdo principal */
+:root {
+  --nav-height: 60px;
+  --transition-time: 0.6s;
 }
 
-/* NAV: container principal da barra de navegação */
+/* Container wrapper para a imagem de fundo */
+.bg-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url("../images/image (2) (1).png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+  background-color: transparent;
+}
+
+/* Container para garantir que o conteúdo fique sobre a imagem */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.1)
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Header e navegação */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(51,51,51,0.95);
+  height: var(--nav-height);
+}
+
 nav {
   display: flex;                  /* layout horizontal usando flexbox */
   justify-content: space-between; /* espaço entre left / center / right */
   align-items: center;            /* alinha verticalmente os itens ao centro */
-  padding: 10px 20px;             /* espaçamento interno */
-  background-color: rgba(51,51,51,0.95); /* fundo levemente opaco */
-  color: white;                   /* cor padrão do texto na navbar */
-  height: 60px;                   /* altura fixa da navbar */
+  padding: 10px 40px;            /* espaçamento interno aumentado */
+  color: white;                  /* cor padrão do texto na navbar */
+  height: 100%;                  /* ocupa toda altura do header */
   font-family: Arial, sans-serif; /* fonte da navbar */
-  position: fixed;                /* fixa a navbar no topo */
-  top: 0; left: 0; width: 100%;   /* topo esquerdo e ocupa toda largura */
-  z-index: 1000;                  /* fica acima do restante da página */
+  width: 100%;                   /* ocupa toda largura */
 }
 
 /* nav-left: área esquerda (logo / nome da empresa) */
 .nav-left {
-  flex: 0 0 auto;                 /* não cresce nem encolhe */
-  display: flex;                  /* permite alinhamento inline com imagem */
-  align-items: center;            /* centraliza verticalmente o conteúdo */
-  gap: 0.25em;                    /* pequeno espaçamento entre partes */
+  flex: 0 0 25%;                /* largura fixa de 25% */
+  display: flex;                /* permite alinhamento inline com imagem */
+  align-items: center;          /* centraliza verticalmente o conteúdo */
+  justify-content: flex-start;  /* alinha à esquerda */
 }
 
 /* site-title: nome da marca */
 .site-title {
-  font-family: 'Great Vibes', cursive; /* fonte decorativa (se importada) */
-  font-size: 22px;               /* tamanho do texto da marca */
-  color: white;                  /* cor do texto */
-  margin: 0;                     /* remove margem padrão do h1 */
-  line-height: 1;                /* controla altura da linha */
-  display: flex;                 /* manter imagem inline com texto */
-  align-items: center;           /* alinhar imagem e texto verticalmente */
+  font-family: 'Great Vibes', cursive;
+  font-size: 22px;
+  color: white;
+  margin: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  text-decoration: none;        /* remove sublinhado dos links */
+  white-space: nowrap;          /* evita quebra de linha */
 }
 
 /* trip-word: wrapper para palavra com imagem */
 .trip-word {
-  display: inline-flex;          /* mantém imagem e texto na mesma linha */
-  align-items: baseline;         /* alinha com baseline da fonte */
-  gap: 0.06em;                   /* ajuste fino entre imagem e texto */
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.06em;
+  margin: 0 4px;               /* espaçamento lateral */
 }
 
 /* trip-image: imagem que substitui a letra */
@@ -63,52 +95,70 @@ nav {
 
 /* nav-center: área central que contém os links */
 .nav-center {
-  flex: 1 1 auto;                /* cresce para ocupar o espaço do meio */
-  display: flex;                 /* exibe links em linha */
-  justify-content: center;       /* centraliza horizontalmente os links */
-  list-style: none;              /* remove marcadores */
-  gap: 30px;                     /* espaçamento entre links */
-  margin: 0;                     /* remove margem padrão */
-  padding: 0;                    /* remove padding padrão */
-  z-index: 1010;                 /* garante que fique acima do fundo */
+  flex: 0 0 50%;               /* largura fixa de 50% */
+  display: flex;               /* exibe links em linha */
+  justify-content: center;     /* centraliza horizontalmente os links */
+  align-items: center;         /* centraliza verticalmente */
+  list-style: none;           /* remove marcadores */
+  gap: 40px;                  /* aumenta espaçamento entre links */
+  margin: 0;                  /* remove margem padrão */
+  padding: 0;                 /* remove padding padrão */
 }
 
 /* estilos dos links no centro */
 .nav-center li a {
-  color: white;                  /* cor branca */
-  text-decoration: none;         /* remove sublinhado */
-  font-weight: bold;             /* negrito */
-  font-size: 16px;               /* tamanho da fonte */
-  padding: 6px 4px;              /* aumenta a área clicável */
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 12px;          /* aumenta área clicável */
+  transition: color 0.3s;     /* transição suave no hover */
+}
+
+.nav-center li a:hover {
+  color: #ff4b2b;            /* cor ao passar o mouse */
 }
 
 /* nav-right: área direita (busca e botões) */
 .nav-right {
-  flex: 0 0 auto;                /* não cresce nem encolhe */
-  display: flex;                 /* itens em linha */
-  gap: 10px;                     /* espaço entre input e botões */
-  align-items: center;           /* centraliza verticalmente */
+  flex: 0 0 25%;             /* largura fixa de 25% */
+  display: flex;             /* itens em linha */
+  gap: 10px;                /* espaço entre input e botões */
+  align-items: center;       /* centraliza verticalmente */
+  justify-content: flex-end; /* alinha à direita */
 }
 
 /* input de busca */
 .nav-right input[type="text"] {
-  padding: 6px 8px;              /* espaçamento interno */
-  width: 180px;                  /* largura em desktop */
-  border-radius: 5px;            /* cantos arredondados */
-  border: none;                  /* remove borda padrão */
-  outline: none;                 /* remove contorno padrão (pode adicionar :focus) */
+  padding: 8px 12px;           /* aumenta espaçamento interno */
+  width: 200px;                /* aumenta largura */
+  border-radius: 20px;         /* deixa mais arredondado */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* borda sutil */
+  background: rgba(255, 255, 255, 0.1); /* fundo semi-transparente */
+  color: white;                /* texto branco */
+  font-size: 14px;            /* tamanho da fonte */
+}
+
+.nav-right input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* placeholder mais visível */
 }
 
 /* botões da direita */
 .nav-right button {
-  padding: 7px 12px;             /* espaçamento interno do botão */
-  background-color: #006400;     /* verde escuro */
-  color: white;                  /* texto branco */
-  border: none;                  /* remove borda padrão */
-  cursor: pointer;               /* cursor pointer ao passar */
-  border-radius: 3px;            /* cantos arredondados */
+  padding: 8px 15px;          /* aumenta área clicável */
+  background-color: #ff4b2b;  /* cor mais vibrante */
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;        /* arredonda igual ao input */
+  font-weight: 500;          /* fonte um pouco mais bold */
+  transition: all 0.3s;      /* transição suave */
 }
-.nav-right button:hover { background-color: #004d00; } /* hover dos botões */
+
+.nav-right button:hover {
+  background-color: #ff6b4b; /* cor mais clara no hover */
+  transform: translateY(-1px); /* efeito sutil de elevação */
+}
 
 /* social-icons: ícones sociais fixos (opcional) */
 .social-icons {
@@ -131,37 +181,232 @@ body {
 
 /* hero-text: container do título principal */
 .hero-text {
-  min-height: 60vh;               /* ocupa pelo menos 60% da viewport */
-  display: flex;                  /* layout flex para alinhamento */
-  align-items: flex-start;        /* alinha itens ao topo do container */
-  padding: 100px 40px 40px;       /* espaço superior para não ficar sob a nav */
-  position: relative;             /* referência para posicionamentos internos */
+  min-height: 70vh;               /* aumentei a altura */
+  display: flex;                  
+  flex-direction: column;         /* empilha os elementos verticalmente */
+  align-items: center;            /* centraliza horizontalmente */
+  justify-content: center;        /* centraliza verticalmente */
+  padding: 120px 40px 40px;      /* aumentei o padding superior */
+  position: relative;
+  text-align: center;            /* centraliza o texto */
 }
 
 /* título principal dentro do hero */
 .hero-text h2 {
-  font-family: 'Great Vibes', cursive; /* fonte decorativa */
-  font-size: 3.5rem;               /* tamanho grande (ajuste se desejar) */
-  color: white;                    /* cor do texto */
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.6); /* sombra para legibilidade */
-  margin: 0;                       /* remove margem padrão */
-  line-height: 1;                  /* controla espaçamento entre linhas */
-  white-space: nowrap;             /* evita quebra em desktop */
-  position: static;                /* mantém no fluxo (evita overlap) */
-  z-index: 1000;                   /* acima do fundo */
+  font-family: 'Great Vibes', cursive;
+  font-size: 5rem;               /* aumentei o tamanho da fonte */
+  color: white;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7), /* sombra principal */
+               0 0 20px rgba(255,255,255,0.3); /* brilho suave */
+  margin: 0;
+  line-height: 1.3;             /* aumentei o espaçamento entre linhas */
+  white-space: pre-line;        /* permite quebra de linha após a vírgula */
+  position: relative;
+  z-index: 1000;
+  animation: titleGlow 2s ease-in-out infinite alternate; /* adiciona brilho animado */
 }
 
-/* responsividade */
+/* Botão do hero */
+#more-informations {
+  margin-top: 2em;
+  padding: 20px 40px;            /* aumentei o padding */
+  font-size: 1.5rem;             /* aumentei o tamanho da fonte */
+  background: rgba(255, 75, 43, 0.8); /* fundo semi-transparente */
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50px;           /* bordas mais arredondadas */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation: buttonPulse 2s infinite; /* adiciona pulsação */
+}
+
+#more-informations:hover {
+  background: rgba(255, 75, 43, 0.9);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+#more-informations:active {
+  transform: translateY(1px);
+}
+
+/* Animação de brilho para o título */
+@keyframes titleGlow {
+  from {
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7),
+                 0 0 20px rgba(255,255,255,0.3);
+  }
+  to {
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.7),
+                 0 0 30px rgba(255,255,255,0.5),
+                 0 0 40px rgba(255,75,43,0.3);
+  }
+}
+
+/* Animação de pulsação para o botão */
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+  50% {
+    box-shadow: 0 5px 25px rgba(255,75,43,0.5);
+  }
+  100% {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+}
+
+/* Animações de página */
+main {
+  transition: transform var(--transition-time) ease, opacity var(--transition-time) ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+main.page-exit {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+main.page-enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-phrase {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform var(--transition-time) ease, opacity var(--transition-time) ease;
+}
+
+.page-exit .hero-phrase {
+  transform: translateY(-30px);
+  opacity: 0;
+}
+
+.about-content {
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform var(--transition-time) ease, opacity var(--transition-time) ease;
+}
+
+.page-exit .about-content {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+/* Estilos da página About Us */
+.about-page {
+  padding: 80px 20px;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-page h1 {
+  font-size: 4em;
+  text-align: center;
+  margin-bottom: 2em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.company-info {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 2em;
+  border-radius: 10px;
+  margin-bottom: 4em;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.company-info p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 1em;
+  color: white;
+}
+
+.team-section {
+  margin-top: 4em;
+}
+
+.team-section h2 {
+  font-size: 3em;
+  color: white;
+  text-align: center;
+  margin-bottom: 1.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+  padding: 1em;
+}
+
+.team-member {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+  padding: 1.5em;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member h3 {
+  color: white;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.team-member p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1em;
+}
+
+.team-member .role {
+  background: #ff4b2b;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* Responsividade */
 @media (max-width: 900px) {
   .hero-text h2 { font-size: 2.5rem; }
   .site-title { font-size: 20px; }
   .nav-center { gap: 20px; }
   .nav-right input[type="text"] { width: 140px; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-page h1 { font-size: 3em; }
 }
+
 @media (max-width: 600px) {
   .nav-center { gap: 12px; }
   .nav-center li a { font-size: 14px; }
   .nav-right input[type="text"] { width: 110px; }
   .hero-text h2 { font-size: 1.6rem; white-space: normal; }
-  .social-icons { display: none; } /* opcional: esconder ícones em telas muito pequenas */
+  .social-icons { display: none; }
+  .team-grid { grid-template-columns: 1fr; }
+  .about-page h1 { font-size: 2.5em; }
 }
+
