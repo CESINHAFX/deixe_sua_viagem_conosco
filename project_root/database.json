@@ -1,50 +1,60 @@
 {
+    
     "countries": [
       {
         "id": 1,
         "name": "Australia",
+        "categories": ["nature", "wildlife", "beaches", "urban"],
         "cities": [
           {
             "name": "Sydney, Australia",
-            "imageUrl": "enter_your_image_for_sydney.jpg",
-            "description": "A vibrant city known for its iconic landmarks like the Sydney Opera House and Sydney Harbour Bridge."
+            "imageUrl": "images/Copilot_20251027_052606.png",
+            "description": "Experience urban life and natural wonders in Sydney. Features: iconic Opera House, beautiful Bondi Beach, harbour cruises, coastal walks, wildlife encounters at Taronga Zoo, vibrant food markets, and historic The Rocks district.",
+            "keywords": ["opera house", "beach", "harbour", "zoo", "market", "coastal"]
           },
           {
             "name": "Melbourne, Australia",
-            "imageUrl": "enter_your_image_for_melbourne.jpg",
-            "description": "A cultural hub famous for its art, food, and diverse neighborhoods."
+            "imageUrl": "images/Copilot_20251027_052600.png",
+            "description": "Discover Melbourne's artistic soul. Highlights: street art in laneways, Federation Square galleries, coffee culture, tram rides, Queen Victoria Market, Royal Botanic Gardens, and sports at MCG.",
+            "keywords": ["art", "coffee", "culture", "gardens", "sports", "market"]
           }
         ]
       },
       {
         "id": 2,
         "name": "Japan",
+        "categories": ["culture", "temples", "food", "technology"],
         "cities": [
           {
             "name": "Tokyo, Japan",
-            "imageUrl": "enter_your_image_for_tokyo.jpg",
-            "description": "A bustling metropolis blending tradition and modernity, famous for its cherry blossoms and rich culture."
+            "imageUrl": "images/Copilot_20251027_052544.png",
+            "description": "Immerse in Tokyo's unique blend of tradition and future. Attractions: ancient temples, modern Shibuya crossing, anime culture in Akihabara, sushi at Tsukiji, cherry blossoms in Ueno Park, and shopping in Harajuku.",
+            "keywords": ["temple", "modern", "anime", "sushi", "sakura", "shopping"]
           },
           {
             "name": "Kyoto, Japan",
-            "imageUrl": "enter_your_image_for_kyoto.jpg",
-            "description": "Known for its historic temples, gardens, and traditional tea houses."
+            "imageUrl": "images/Copilot_20251027_052540.png",
+            "description": "Step back in time in historic Kyoto. Features: traditional tea ceremonies, zen gardens, historic temples like Kinkaku-ji, geisha district of Gion, bamboo forest in Arashiyama, and seasonal festivals.",
+            "keywords": ["temple", "tea", "garden", "geisha", "bamboo", "festival"]
           }
         ]
       },
       {
         "id": 3,
         "name": "Brazil",
+        "categories": ["beaches", "culture", "nature", "festivals"],
         "cities": [
           {
             "name": "Rio de Janeiro, Brazil",
-            "imageUrl": "enter_your_image_for_rio.jpg",
-            "description": "A lively city known for its stunning beaches, vibrant carnival celebrations, and iconic landmarks."
+            "imageUrl": "images/Copilot_20251027_052534.png",
+            "description": "Experience Rio's vibrant spirit. Highlights: carnival celebrations, Christ the Redeemer, Copacabana and Ipanema beaches, samba dancing, Sugarloaf Mountain cable car, and Tijuca National Park.",
+            "keywords": ["carnival", "beach", "samba", "christ", "mountain", "park"]
           },
           {
             "name": "São Paulo, Brazil",
-            "imageUrl": "enter_your_image_for_sao-paulo.jpg",
-            "description": "The financial hub with diverse culture, arts, and a vibrant nightlife."
+            "imageUrl": "images/Copilot_20251027_052529.png",
+            "description": "Explore São Paulo's urban energy. Features: diverse cuisine, MASP art museum, Ibirapuera Park, Vila Madalena street art, Pinacoteca gallery, and vibrant nightlife in Beco do Batman.",
+            "keywords": ["food", "art", "park", "culture", "nightlife", "museum"]
           }
         ]
       }
@@ -53,29 +63,36 @@
       {
         "id": 1,
         "name": "Angkor Wat, Cambodia",
-        "imageUrl": "enter_your_image_for_angkor-wat.jpg",
-        "description": "A UNESCO World Heritage site and the largest religious monument in the world."
+        "imageUrl": "images/Copilot_20251027_052523.png",
+        "description": "Explore the world's largest religious monument. Features: ancient Khmer architecture, sunrise views, intricate stone carvings, Buddhist temples, Ta Prohm's tree-covered ruins, and Bayon's face towers.",
+        "keywords": ["temple", "ancient", "buddhist", "architecture", "ruins", "sunrise"],
+        "categories": ["culture", "history", "architecture", "spiritual"]
       },
       {
         "id": 2,
         "name": "Taj Mahal, India",
-        "imageUrl": "enter_your_image_for_taj-mahal.jpg",
-        "description": "An iconic symbol of love and a masterpiece of Mughal architecture."
+        "imageUrl": "images/Copilot_20251027_052513.png",
+        "description": "Marvel at this monument to eternal love. Highlights: Mughal architecture, marble domes, Persian gardens, intricate inlay work, Yamuna River views, and stunning sunrise and sunset vistas.",
+        "keywords": ["monument", "marble", "garden", "architecture", "river", "sunset"],
+        "categories": ["culture", "history", "architecture", "romance"]
       }
     ],
     "beaches": [
       {
         "id": 1,
         "name": "Bora Bora, French Polynesia",
-        "imageUrl": "enter_your_image_for_bora-bora.jpg",
-        "description": "An island known for its stunning turquoise waters and luxurious overwater bungalows."
+        "imageUrl": "images/Copilot_20251027_052509.png",
+        "description": "Paradise found in the South Pacific. Features: overwater bungalows, crystal lagoons, coral reefs, Mount Otemanu views, water sports, and luxury spa retreats.",
+        "keywords": ["tropical", "lagoon", "reef", "luxury", "mountain", "spa"],
+        "categories": ["luxury", "nature", "romance", "water sports"]
       },
       {
         "id": 2,
         "name": "Copacabana Beach, Brazil",
-        "imageUrl": "enter_your_image_for_copacabana.jpg",
-        "description": "A famous beach in Rio de Janeiro, Brazil, with a vibrant atmosphere and scenic views."
+        "imageUrl": "images/Copilot_20251027_052504.png",
+        "description": "Experience Rio's most famous beach. Highlights: golden sands, beach volleyball, sunset views, seaside restaurants, Sugarloaf Mountain backdrop, and vibrant beach culture.",
+        "keywords": ["beach", "volleyball", "sunset", "food", "mountain", "culture"],
+        "categories": ["urban beach", "sports", "culture", "nightlife"]
       }
     ]
   }
-  

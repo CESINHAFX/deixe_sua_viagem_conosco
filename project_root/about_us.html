@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR"> <!-- Define o idioma principal como Português do Brasil -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>About Us - Leave Your Trip to Us</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-  <script src="js/page-transitions.js" defer></script>
+  <!-- Meta tags para configuração básica -->
+  <meta charset="UTF-8">                                           <!-- Define a codificação de caracteres -->
+  <meta name="viewport" content="width=device-width,initial-scale=1"> <!-- Configuração para responsividade mobile -->
+  <title>About Us - Leave Your Trip to Us</title>                 <!-- Título da página na aba do navegador -->
+
+  <!-- Folhas de estilo -->
+  <link rel="stylesheet" href="styles.css">                       <!-- Estilos principais do site -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet"> <!-- Fontes personalizadas -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"> <!-- Ícones FontAwesome -->
+  
+  <!-- Scripts -->
+  <script src="js/page-transitions.js" defer></script>            <!-- Sistema de transições entre páginas -->
 </head>
 <body>
 
@@ -56,44 +61,50 @@
   <div id="shared-footer"></div>
 
   <script>
-    // carregar fragments (caminhos relativos)
+    /**
+     * Carrega fragmentos HTML (header/footer) de forma assíncrona
+     * @param {string} url - Caminho relativo para o fragmento HTML
+     * @param {string} containerId - ID do elemento onde o fragmento será injetado
+     */
     function loadFragment(url, containerId) {
+      // Faz uma requisição HTTP para buscar o fragmento
       fetch(url)
         .then(function(response) {
+          // Verifica se a requisição foi bem-sucedida
           if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
           return response.text();
         })
         .then(function(html) {
+          // Busca o container onde o fragmento será injetado
           var container = document.getElementById(containerId);
           if (!container) return;
+          // Injeta o HTML e atualiza links ativos
           container.innerHTML = html;
           markActiveLink(container);
-    // tirar barra de search do header pro pg about_us.html
-          const currentPage = window.location.pathname.split('/').pop();
-          if (currentPage === 'about_us.html' || currentPage === 'contact_us.html') {
-            const searchBar = document.getElementById('Research');
-            const btnSearch = document.getElementById('btnSearch');
-            const btnClean = document.getElementById('clean');
-            if (btnSearch && btnClean && searchBar) {
-              btnSearch.style.display = "none";
-              searchBar.style.display = "none";
-              btnClean.style.display = "none";
-            }
-          }
         })
         .catch(function(err) {
           console.error('Erro ao carregar fragmento:', err);
         });
     }
 
-    // destaque do link ativo no menu
+    /**
+     * Marca o link ativo no menu de navegação baseado na URL atual
+     * @param {string|HTMLElement} container - Container dos links ou seu ID
+     */
     function markActiveLink(container) {
+      // Obtém o elemento container, seja por ID ou diretamente
       var el = typeof container === 'string' ? document.getElementById(container) : container;
       if (!el) return;
+      
+      // Encontra todos os links no container
       var links = el.querySelectorAll('a[href]');
+      // Obtém o nome do arquivo atual da URL
       var current = window.location.pathname.split('/').pop() || 'index.html';
+      
+      // Para cada link, verifica se corresponde à página atual
       links.forEach(function(a) {
         var hrefFile = (a.getAttribute('href') || '').split('/').pop();
+        // Adiciona ou remove a classe 'active' conforme necessário
         if (hrefFile === current) a.classList.add('active'); else a.classList.remove('active');
       });
     }
@@ -106,23 +117,9 @@
       var msg = prompt('Enviar mensagem para ' + name + '\nDigite sua mensagem:');
       if (msg) alert('Mensagem enviada a ' + name + ':\n\n' + msg);
     });
-    // tirar barra de search do header pro pg about_us.html
-    
-   // carregar header e footer (caminhos relativos)
-    loadFragment('fragments/header.html', 'shared-header', () => {
-    // tirar barra de search do header pro pg about_us.html
-          const currentPage = window.location.pathname.split('/').pop();
-          if (currentPage === 'about_us.html' || currentPage === 'contact_us.html') {
-            const searchBar = document.getElementById('Research');
-            const btnSearch = document.getElementById('btnSearch');
-            const btnClean = document.getElementById('clean');
-            if (btnSearch && btnClean && searchBar) {
-              btnSearch.style.display = "none";
-              searchBar.style.display = "none";
-              btnClean.style.display = "none";
-            }
-          }
-        });
+
+    // carregar header e footer (caminhos relativos)
+    loadFragment('fragments/header.html', 'shared-header');
     loadFragment('fragments/footer.html', 'shared-footer');
   </script>
 </body>

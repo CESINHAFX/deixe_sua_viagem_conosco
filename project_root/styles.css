@@ -1,36 +1,42 @@
-/* Reset e variáveis */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Reset global para garantir consistência entre navegadores */
+* { 
+  box-sizing: border-box; /* Inclui padding e border na largura/altura total */
+  margin: 0;              /* Remove margens padrão */
+  padding: 0;            /* Remove padding padrão */
+}
+
+/* Variáveis CSS globais para valores reutilizáveis */
 :root {
-  --nav-height: 60px;
-  --transition-time: 0.6s;
+  --nav-height: 60px;     /* Altura padrão da barra de navegação */
+  --transition-time: 0.6s; /* Duração padrão para animações */
 }
 
-/* Container wrapper para a imagem de fundo */
+/* Container wrapper para a imagem de fundo - cobre toda a viewport */
 .bg-wrapper {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image: url("../images/image (2) (1).png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
-  background-color: transparent;
+  position: fixed;         /* Fixa o wrapper em relação à viewport */
+  inset: 0;               /* Atalho para top:0, right:0, bottom:0, left:0 */
+  z-index: -1;            /* Coloca o fundo atrás de todo o conteúdo */
+  background-image: url("../images/image (2) (1).png"); /* Imagem de fundo */
+  background-repeat: no-repeat;    /* Evita repetição da imagem */
+  background-position: center center; /* Centraliza a imagem */
+  background-size: 100% 100%;      /* Estica a imagem para cobrir todo o container */
+  background-color: transparent;    /* Fundo transparente onde não há imagem */
 }
 
-/* Container para garantir que o conteúdo fique sobre a imagem */
+/* Overlay escuro sobre a imagem de fundo para melhor legibilidade */
 body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  content: '';              /* Necessário para pseudo-elementos */
+  position: fixed;          /* Fixa em relação à viewport */
+  top: 0;                   /* Alinha ao topo */
+  left: 0;                  /* Alinha à esquerda */
+  width: 100%;              /* Ocupa toda a largura */
+  height: 100%;             /* Ocupa toda a altura */
   background: linear-gradient(
-    rgba(0, 0, 0, 0.2),
-    rgba(0, 0, 0, 0.1)
+    rgb(0 0 0 / 20%),     /* Mais escuro no topo */
+    rgb(0 0 0 / 10%)      /* Mais claro embaixo */
   );
-  z-index: -1;
-  pointer-events: none;
+  z-index: -1;              /* Fica atrás do conteúdo mas na frente da imagem */
+  pointer-events: none;      /* Permite cliques passarem através */
 }
 
 /* Header e navegação */
@@ -40,7 +46,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(51,51,51,0.95);
+  background-color: rgb(51 51 51 / 95%);
   height: var(--nav-height);
 }
 
@@ -95,14 +101,18 @@ nav {
 
 /* nav-center: área central que contém os links */
 .nav-center {
-  flex: 0 0 50%;               /* largura fixa de 50% */
-  display: flex;               /* exibe links em linha */
-  justify-content: center;     /* centraliza horizontalmente os links */
-  align-items: center;         /* centraliza verticalmente */
+  position: fixed;
+  left: 50%;                      /* posiciona a 50% da esquerda */
+  transform: translateX(-50%);    /* centraliza o elemento */
+  top: 0;                          /* alinha com o topo do header */
+  display: flex;                   /* exibe links em linha */
+  justify-content: center;         /* centraliza horizontalmente os links */
+  align-items: center;             /* centraliza verticalmente */
   list-style: none;           /* remove marcadores */
   gap: 40px;                  /* aumenta espaçamento entre links */
   margin: 0;                  /* remove margem padrão */
-  padding: 0;                 /* remove padding padrão */
+  padding: 15px 0;
+  z-index: 1001;                 /* acima de quase tudo */
 }
 
 /* estilos dos links no centro */
@@ -128,19 +138,20 @@ nav {
   justify-content: flex-end; /* alinha à direita */
 }
 
+
 /* input de busca */
 .nav-right input[type="text"] {
   padding: 8px 12px;           /* aumenta espaçamento interno */
   width: 200px;                /* aumenta largura */
   border-radius: 20px;         /* deixa mais arredondado */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* borda sutil */
-  background: rgba(255, 255, 255, 0.1); /* fundo semi-transparente */
+  border: 1px solid rgb(255 255 255 / 20%); /* borda sutil */
+  background: rgb(255 255 255 / 10%); /* fundo semi-transparente */
   color: white;                /* texto branco */
   font-size: 14px;            /* tamanho da fonte */
 }
 
 .nav-right input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.7); /* placeholder mais visível */
+  color: rgb(255 255 255 / 70%); /* placeholder mais visível */
 }
 
 /* botões da direita */
@@ -196,8 +207,9 @@ body {
   font-family: 'Great Vibes', cursive;
   font-size: 5rem;               /* aumentei o tamanho da fonte */
   color: white;
-  text-shadow: 3px 3px 6px rgba(0,0,0,0.7), /* sombra principal */
-               0 0 20px rgba(255,255,255,0.3); /* brilho suave */
+  text-shadow: 3px 3px 6px rgb(0 0 0 / 70%), /* sombra principal */
+               0 0 20px rgb(255 255 255 / 30%); /* brilho suave */
+
   margin: 0;
   line-height: 1.3;             /* aumentei o espaçamento entre linhas */
   white-space: pre-line;        /* permite quebra de linha após a vírgula */
@@ -211,9 +223,9 @@ body {
   margin-top: 2em;
   padding: 20px 40px;            /* aumentei o padding */
   font-size: 1.5rem;             /* aumentei o tamanho da fonte */
-  background: rgba(255, 75, 43, 0.8); /* fundo semi-transparente */
+  background: rgb(255 75 43 / 80%); /* fundo semi-transparente */
   color: white;
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  border: 2px solid rgb(255 255 255 / 60%);
   border-radius: 50px;           /* bordas mais arredondadas */
   cursor: pointer;
   transition: all 0.3s ease;
@@ -222,15 +234,15 @@ body {
   font-weight: bold;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
   animation: buttonPulse 2s infinite; /* adiciona pulsação */
 }
 
 #more-informations:hover {
-  background: rgba(255, 75, 43, 0.9);
+  background: rgb(255 75 43 / 90%);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 40%);
+  border-color: rgb(255 255 255 / 80%);
 }
 
 #more-informations:active {
@@ -240,26 +252,29 @@ body {
 /* Animação de brilho para o título */
 @keyframes titleGlow {
   from {
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.7),
-                 0 0 20px rgba(255,255,255,0.3);
+    text-shadow: 3px 3px 6px rgb(0 0 0 / 70%),
+                 0 0 20px rgb(255 255 255 / 30%);
   }
+
   to {
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.7),
-                 0 0 30px rgba(255,255,255,0.5),
-                 0 0 40px rgba(255,75,43,0.3);
+    text-shadow: 3px 3px 6px rgb(0 0 0 / 70%),
+                 0 0 30px rgb(255 255 255 / 50%),
+                 0 0 40px rgb(255 75 43 / 30%);
   }
 }
 
 /* Animação de pulsação para o botão */
 @keyframes buttonPulse {
   0% {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
   }
+
   50% {
-    box-shadow: 0 5px 25px rgba(255,75,43,0.5);
+    box-shadow: 0 5px 25px rgb(255 75 43 / 50%);
   }
+
   100% {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
   }
 }
 
@@ -319,11 +334,11 @@ main.page-enter {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: bold;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
 }
 
 .company-info {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(0 0 0 / 70%);
   padding: 2em;
   border-radius: 10px;
   margin-bottom: 4em;
@@ -348,7 +363,7 @@ main.page-enter {
   color: white;
   text-align: center;
   margin-bottom: 1.5em;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
 }
 
 .team-grid {
@@ -359,7 +374,7 @@ main.page-enter {
 }
 
 .team-member {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(0 0 0 / 70%);
   border-radius: 10px;
   padding: 1.5em;
   text-align: center;
@@ -377,7 +392,7 @@ main.page-enter {
 }
 
 .team-member p {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   margin-bottom: 1em;
 }
 
@@ -391,7 +406,7 @@ main.page-enter {
 }
 
 /* Responsividade */
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .hero-text h2 { font-size: 2.5rem; }
   .site-title { font-size: 20px; }
   .nav-center { gap: 20px; }
@@ -400,7 +415,7 @@ main.page-enter {
   .about-page h1 { font-size: 3em; }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .nav-center { gap: 12px; }
   .nav-center li a { font-size: 14px; }
   .nav-right input[type="text"] { width: 110px; }
@@ -408,5 +423,287 @@ main.page-enter {
   .social-icons { display: none; }
   .team-grid { grid-template-columns: 1fr; }
   .about-page h1 { font-size: 2.5em; }
+}
+
+/* Estilos da página Contact Us */
+
+
+.contact_us-page{
+    display: block;
+    margin-block: 1em;
+    margin-inline: 0;
+    unicode-bidi: isolate;
+    margin-bottom: 0.5em;  
+}
+
+.contact_us-page h1 {
+    font-size: 4em;
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
+}
+
+/* Ajustes para os títulos do formulário de contato */
+.table-placeholder h2,
+.table-placeholder h3,
+.table-placeholder h4 {
+  font-size: 2em;              /* reduzido de 4em para 2em */
+  text-align: center;
+  margin-bottom: 0.25em;        /* reduzido de 2em para 0.5em */
+  color: white;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
+  background: transparent;
+}
+
+.table-placeholder h2 + input[type="text"],
+.table-placeholder h3 + input[type="text"] {
+  width: 300px;
+  height: 40px;
+  display: block;
+  margin: 0 auto 1.17em;
+  text-align: center;
+  color: rgb(0 0 0 / 0%);
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: transparent;
+}
+
+/* Input para Message - 7x maior */
+.table-placeholder h4 + input[type="text"] {
+  width: 700px;               /* ~2.3x mais largo que os outros inputs */
+  height: 140px;              /* 7x a altura dos outros inputs */
+  padding: 1em;
+  border-radius: 8px;
+  display: block;       /* permite centralizar o próprio input */
+  margin: 0 auto;            /* centraliza o input na página */
+  text-align: left;          /* alinha o texto à esquerda dentro do input */
+  background: transparent;
+  border: 2px solid #ccc;
+}
+
+.table-placeholder h2 + input[type="text"]::placeholder,
+.table-placeholder h3 + input[type="text"]::placeholder,
+.table-placeholder h4 + input[type="text"]::placeholder {
+  color: rgb(0 0 0);
+  opacity: 0.7;              /* torna o placeholder um pouco mais suave */
+  font-weight: bold;       /* evita negrito no placeholder */
+  font-size: 1.3em;        /* aumenta um pouco o tamanho da fonte */
+}
+
+/* Ajuste do botão Submit */
+.Submit {
+  display: block;
+  margin: 2em auto;
+  padding: 15px 30px;
+  background-color: #ff4b2b;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Submit:hover {
+  background-color: #ff6b4b;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgb(0 0 0 / 30%);
+}
+
+.table-placeholder {
+    margin-top: 0.5em;          /* Adicionado para manter espaçamento consistente */
+}
+
+/* Estilos para resultados da busca */
+.search-results {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background: rgb(51 51 51 / 95%);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+  z-index: 1000;
+}
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  padding: 12px;
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-results li:hover {
+  background: rgb(255 75 43 / 20%);
+}
+
+.search-results h3 {
+  color: white;
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.search-results p {
+  color: rgb(255 255 255 / 70%);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Estilos para a página de recomendações */
+.search-results {
+  position: relative;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.search-results-text {
+  text-align: center;
+  margin-bottom: 40px;
+  z-index: 2;
+}
+
+.search-results-text h4 {
+  font-size: 3.5em;
+  color: white;
+  margin-bottom: 0.3em;
+  text-shadow: 2px 2px 4px rgb(0 0 0 / 50%);
+  font-family: 'Great Vibes', cursive;
+}
+
+.search-results-text h5 {
+  font-size: 2.2em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5em;
+}
+
+.cities-recommendation {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px;
+  z-index: 2;
+}
+
+.recommendation-card {
+  width: 612px;
+  height: 112.56px;
+  margin: 0 auto;
+  background: rgb(0 0 0 / 85%);
+  border-radius: 12px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgb(0 0 0 / 30%);
+  transition: transform 0.3s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-5px);
+}
+
+.recommendation-card img {
+  width: 150px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recommendation-card-content {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recommendation-card h3 {
+  color: #ff4b2b;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.recommendation-card .score {
+  color: #ffd700;
+  font-size: 0.9em;
+  margin: 5px 0;
+}
+
+.recommendation-card p {
+  color: white;
+  font-size: 0.9em;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Estado de loading */
+.loading-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  background: rgb(0 0 0 / 80%);
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 3;
+}
+
+.loading-spinner {
+  border: 4px solid rgb(255 255 255 / 30%);
+  border-radius: 50%;
+  border-top: 4px solid #ff4b2b;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsividade */
+@media (width <= 768px) {
+  .recommendation-card {
+    width: 100%;
+    max-width: 612px;
+  }
+  
+  .search-results-text h4 {
+    font-size: 2.5em;
+  }
+  
+  .search-results-text h5 {
+    font-size: 1.8em;
+  }
 }
 
