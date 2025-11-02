@@ -1,0 +1,33 @@
+{
+  "name": "deixe-sua-viagem-conosco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CESINHAFX/deixe-sua-viagem-conosco.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CESINHAFX/deixe-sua-viagem-conosco/issues"
+  },
+  "homepage": "https://github.com/CESINHAFX/deixe-sua-viagem-conosco#readme",
+  "dependencies": {
+    "fuse.js": "^7.1.0"
+  },
+  "devDependencies": {
+    "@eslint/css": "^0.14.0",
+    "@eslint/js": "^9.38.0",
+    "@eslint/json": "^0.13.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "stylelint-config-standard": "^39.0.1"
+  }
+}

@@ -21,12 +21,12 @@
   <script>
     // Load shared header/footer. Call window.setupHeaderButtons if available after header loads.
     if (typeof loadFragment === 'function') {
-      loadFragment('fragments/header.html', 'shared-header', () => {
+      loadFragment('fragments\\header.html', 'shared-header', () => {
         if (typeof window.setupHeaderButtons === 'function') {
           window.setupHeaderButtons();
         }
       });
-      loadFragment('fragments/footer.html', 'shared-footer');
+      loadFragment('fragments\footer.html', 'shared-footer');
     } else {
       console.warn('loadFragment não disponível. Verifique si js/fragments.js foi carregado corretamente.');
     }
@@ -65,7 +65,7 @@
       }
     });
 
-    // comportamento dos botões do header (search / reset) - exemplo simples
+    // comportamento dos botões do header (search / reset)
     document.addEventListener('click', function(e) {
       if (e.target && e.target.id === 'btnSearch') {
         var q = document.getElementById('Research') ? document.getElementById('Research').value : '';
